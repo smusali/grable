@@ -1,0 +1,39 @@
+
+### Get All restaurants
+GET http://localhost:8080/restaurants
+
+
+### Get All restaurants by filters
+GET http://localhost:8080/restaurants?name=Pahad poisid&location=Küüni 2, Tartu, Estonia
+
+
+### Get restaurant by id
+GET http://localhost:8080/restaurants/1
+
+
+### Add a restaurants
+POST  http://localhost:8080/restaurants HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Pahad poisid2",
+  "location": "Küüni 2, Tartu, Estonia",
+  "contactInfo": "pubi@pahadpoisid.ee"
+}
+
+
+### Update a restaurant
+PUT   http://localhost:8080/restaurants/1 HTTP/1.1
+content-type: application/json
+
+{
+  "name": "Pahad poisid3",
+  "location": "Küüni 2, Tartu, Estonia",
+  "contactInfo": "pubi@pahadpoisid.ee"
+}
+
+
+### Delete a restaurant
+DELETE    http://localhost:8080/restaurants/1
+
+
