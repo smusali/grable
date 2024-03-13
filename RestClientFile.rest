@@ -1,19 +1,15 @@
-
 ### Get All restaurants
 GET http://localhost:8080/restaurants
 
-
 ### Get All restaurants by filters
-GET http://localhost:8080/restaurants?name=Pahad poisid&location=Küüni 2, Tartu, Estonia
-
+GET http://localhost:8080/restaurants?name=Pahad%20poisid2&location=K%C3%BC%C3%BCni%202,%20Tartu,%20Estonia
 
 ### Get restaurant by id
 GET http://localhost:8080/restaurants/1
 
-
-### Add a restaurants
-POST  http://localhost:8080/restaurants HTTP/1.1
-content-type: application/json
+### Add a restaurant
+POST http://localhost:8080/restaurants
+Content-Type: application/json
 
 {
   "name": "Pahad poisid2",
@@ -21,10 +17,9 @@ content-type: application/json
   "contactInfo": "pubi@pahadpoisid.ee"
 }
 
-
 ### Update a restaurant
-PUT   http://localhost:8080/restaurants/1 HTTP/1.1
-content-type: application/json
+PUT http://localhost:8080/restaurants/1
+Content-Type: application/json
 
 {
   "name": "Pahad poisid3",
@@ -32,8 +27,54 @@ content-type: application/json
   "contactInfo": "pubi@pahadpoisid.ee"
 }
 
-
 ### Delete a restaurant
-DELETE    http://localhost:8080/restaurants/1
+DELETE http://localhost:8080/restaurants/1
 
+### Get Menu by Restaurant ID
+GET http://localhost:8080/restaurants/:id/menu
 
+### Create a Menu
+POST http://localhost:8080/restaurants/:id/menu
+Content-Type: application/json
+
+{
+  "lastUpdated": "2024-03-13T08:00:00"
+}
+
+### Delete Menu by ID
+DELETE http://localhost:8080/restaurants/:id/menu/:menuId
+
+### Get All Menu Items by Restaurant ID and Menu ID
+GET http://localhost:8080/restaurants/:id/menu/:menuId/items
+
+### Get Menu Item by Restaurant ID, Menu ID, and Item ID
+GET http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
+
+### Create a Menu Item
+POST http://localhost:8080/restaurants/:id/menu/:menuId/items
+Content-Type: application/json
+
+{
+  "name": "Chicken Curry",
+  "description": "Delicious chicken curry with rice",
+  "price": 10.99,
+  "category": "Main Course",
+  "availability": true,
+  "dietaryInfo": "Contains gluten"
+}
+
+### Update Menu Item
+PUT http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
+Content-Type: application/json
+
+{
+  "name": "Vegetable Curry",
+  "description": "Delicious vegetable curry with rice",
+  "price": 8.99,
+  "category": "Vegetarian",
+  "availability": true,
+  "dietaryInfo": "Vegan-friendly"
+}
+
+### Delete Menu Item
+DELETE http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
