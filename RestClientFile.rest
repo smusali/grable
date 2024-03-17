@@ -88,3 +88,8 @@ Content-Type: application/json
 ### Get the list of items in the restaurant’s menu
 GET http://localhost:8080/restaurants/4/menu/30/items
 Content-Type: application/json
+
+
+### Delete a menu item for the restaurant
+DELETE http://localhost:8080/restaurants/4/menu/6/items/7
+Content-Type: application/json
