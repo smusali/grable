@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/restaurants")
+@Tag(name = "Restaurants", description = "CRUD Operations for Restaurants")
 public class RestaurantController {
 
     @Autowired

@@ -7,10 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.util.List;
 
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/menu/{menuId}/items")
+@Tag(name = "Menu Items", description = "CRUD Operations for Menu Items")
 public class MenuItemController {
 
     @Autowired
