@@ -31,7 +31,7 @@ public class RestaurantService {
         return restaurants;
     }
 
-    public Restaurant getRestaurant(String id) {
+    public Restaurant getRestaurant(Long id) {
         return restaurantRepository.findById(id).orElse(null);
     }
 
@@ -41,7 +41,7 @@ public class RestaurantService {
     }
 
     public void updateRestaurant(Long id, Restaurant restaurant) {
-        Optional<Restaurant> existingRestaurantOptional = restaurantRepository.findById(String.valueOf(id));
+        Optional<Restaurant> existingRestaurantOptional = restaurantRepository.findById(Long.valueOf(id));
         if (existingRestaurantOptional.isPresent()) {
             Restaurant existingRestaurant = Restaurant.builder()
                     .id(id)
@@ -58,12 +58,12 @@ public class RestaurantService {
         }
     }
 
-    public void deleteRestaurant(String id) {
+    public void deleteRestaurant(Long id) {
         if (restaurantRepository.findById(id).isPresent()) {
             restaurantRepository.deleteById(id);
             log.info("Restaurant {} is deleted from the Database", id);
         } else {
-            String errorMessage = String.format("Restaurant with ID %s not found", id);
+            String errorMessage = String.format("Restaurant with ID %d not found", id);
             log.error(errorMessage);
             throw new IllegalArgumentException(errorMessage);
         }

@@ -1,39 +1,95 @@
-
 ### Get All restaurants
 GET http://localhost:8080/restaurants
+Content-Type: application/json
 
-
-### Get All restaurants by filters
-GET http://localhost:8080/restaurants?name=Pahad poisid&location=Küüni 2, Tartu, Estonia
-
-
-### Get restaurant by id
-GET http://localhost:8080/restaurants/1
-
-
-### Add a restaurants
-POST  http://localhost:8080/restaurants HTTP/1.1
-content-type: application/json
+### Generate a new restaurant
+POST http://localhost:8080/restaurants
+Content-Type: application/json
 
 {
-  "name": "Pahad poisid2",
-  "location": "Küüni 2, Tartu, Estonia",
-  "contactInfo": "pubi@pahadpoisid.ee"
+  "name": "Test Restaurant",
+  "location": "Test Location",
+  "contactInfo": "test@restaurant.com"
 }
 
+### Get the list of restaurants
+GET http://localhost:8080/restaurants
+Content-Type: application/json
 
-### Update a restaurant
-PUT   http://localhost:8080/restaurants/1 HTTP/1.1
-content-type: application/json
+### Get restaurants filtered by name
+GET http://localhost:8080/restaurants?name=Test%20Restaurant
+Content-Type: application/json
+
+### Update the restaurant
+PUT http://localhost:8080/restaurants/4
+Content-Type: application/json
 
 {
-  "name": "Pahad poisid3",
-  "location": "Küüni 2, Tartu, Estonia",
-  "contactInfo": "pubi@pahadpoisid.ee"
+  "name": "Updated Test Restaurant",
+  "location": "Updated Test Location",
+  "contactInfo": "updated@testrestaurant.com"
 }
 
+### Get the restaurant
+GET http://localhost:8080/restaurants/5
+Content-Type: application/json
 
-### Delete a restaurant
-DELETE    http://localhost:8080/restaurants/1
+### Delete the restaurant
+### DELETE http://localhost:8080/restaurants/4
+### Content-Type: application/json
+
+### Generate a new restaurant (again)
+POST http://localhost:8080/restaurants
+Content-Type: application/json
+
+{
+  "name": "Another Test Restaurant",
+  "location": "Another Test Location",
+  "contactInfo": "another@testrestaurant.com"
+}
+
+### Get the menu of the restaurant
+GET http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
+
+### Create the menu of the restaurant
+POST http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
+
+### Get the menu of the restaurant (after creation)
+GET http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
+
+### Get the menu
+GET http://localhost:8080/restaurants/4/menu/30
+Content-Type: application/json
+
+### Delete the menu
+### DELETE http://localhost:8080/restaurants/4/menu/5
+### Content-Type: application/json
+
+### Create the menu for the restaurant (again)
+POST http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
+
+### Create a new menu item for the restaurant
+POST http://localhost:8080/restaurants/4/menu/30/items
+Content-Type: application/json
+
+{
+  "name": "New Menu Item",
+  "description": "A new menu item description",
+  "price": 10.5,
+  "category": "Main Course",
+  "availability": true,
+  "dietaryInfo": "Vegan"
+}
+
+### Get the list of items in the restaurant’s menu
+GET http://localhost:8080/restaurants/4/menu/30/items
+Content-Type: application/json
 
 
+### Delete a menu item for the restaurant
+DELETE http://localhost:8080/restaurants/4/menu/6/items/7
+Content-Type: application/json

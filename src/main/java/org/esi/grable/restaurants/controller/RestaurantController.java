@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/restaurants")
+@Tag(name = "Restaurants", description = "CRUD Operations for Restaurants")
 public class RestaurantController {
 
     @Autowired
@@ -23,7 +27,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable String id) {
+    public Restaurant getRestaurantById(@PathVariable Long id) {
         return restaurantService.getRestaurant(id);
     }
 
@@ -40,7 +44,7 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRestaurant(@PathVariable String id) {
+    public ResponseEntity<String> deleteRestaurant(@PathVariable Long id) {
         restaurantService.deleteRestaurant(id);
         return ResponseEntity.ok().body("Restaurant deleted successfully.");
     }
