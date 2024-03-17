@@ -3,6 +3,7 @@ package org.esi.grable.menus.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.esi.grable.restaurants.model.Restaurant;
 import org.esi.grable.menuItems.model.MenuItem;
 
 import java.time.LocalDateTime;
@@ -22,7 +23,10 @@ public class Menu {
     @Column(name = "last_updated")
     private LocalDateTime lastUpdated;
 
+    @ManyToOne
+    @JoinColumn(name = "restaurantId", nullable = false)
+    private Restaurant restaurant;
+
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MenuItem> items = new ArrayList<>();
-
 }

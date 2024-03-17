@@ -23,7 +23,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable String id) {
+    public Restaurant getRestaurantById(@PathVariable Long id) {
         return restaurantService.getRestaurant(id);
     }
 
@@ -40,7 +40,7 @@ public class RestaurantController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRestaurant(@PathVariable String id) {
+    public ResponseEntity<String> deleteRestaurant(@PathVariable Long id) {
         restaurantService.deleteRestaurant(id);
         return ResponseEntity.ok().body("Restaurant deleted successfully.");
     }

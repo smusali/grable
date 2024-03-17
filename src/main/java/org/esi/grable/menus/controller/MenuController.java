@@ -10,30 +10,39 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("/menus")
+@RequestMapping("/restaurants/{restaurantId}/menu")
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
 
-    @PostMapping("")
-    public ResponseEntity<Menu> createMenu(@RequestParam LocalDateTime lastUpdated) {
-        Menu menu = menuService.createMenu(lastUpdated);
+    @PostMapping
+    public ResponseEntity<Menu> createMenu(@PathVariable Long restaurantId) {
+        Menu menu = menuService.createMenu(restaurantId, LocalDateTime.now());
         return new ResponseEntity<>(menu, HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Menu> getMenuById(@PathVariable Long id) {
-        Menu menu = menuService.getMenuById(id);
+    @GetMapping
+    public ResponseEntity<Menu> getMenuByRestaurantId(@PathVariable Long restaurantId) {
+        Menu menu = menuService.getMenuByRestaurantId(restaurantId);
         if (menu == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(menu, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMenu(@PathVariable Long id) {
-        menuService.deleteMenu(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @GetMapping("/{menuId}")
+    public ResponseEntity<Menu> getMenuById(@PathVariable Long menuId) {
+        Menu menu = menuService.getMenuById(menuId);
+        if (menu == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(menu, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{menuId}")
+    public ResponseEntity<String> deleteMenu(@PathVariable Long restaurantId, @PathVariable Long menuId) {
+        menuService.deleteMenu(restaurantId, menuId);
+        return ResponseEntity.ok().body("Menu deleted successfully.");
     }
 }

@@ -25,14 +25,4 @@ public class MenuItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
     private Menu menu;
-
-    // Constructors, getters, and setters
-    // You can generate these using Lombok annotations, or write them manually
-
-    public void setMenuId(Long menuId) {
-        if (this.menu == null) {
-            this.menu = new Menu();
-        }
-        this.menu.setId(menuId);
-    }
 }

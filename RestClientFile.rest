@@ -1,80 +1,90 @@
 ### Get All restaurants
 GET http://localhost:8080/restaurants
+Content-Type: application/json
 
-### Get All restaurants by filters
-GET http://localhost:8080/restaurants?name=Pahad%20poisid2&location=K%C3%BC%C3%BCni%202,%20Tartu,%20Estonia
-
-### Get restaurant by id
-GET http://localhost:8080/restaurants/1
-
-### Add a restaurant
+### Generate a new restaurant
 POST http://localhost:8080/restaurants
 Content-Type: application/json
 
 {
-  "name": "Pahad poisid2",
-  "location": "Küüni 2, Tartu, Estonia",
-  "contactInfo": "pubi@pahadpoisid.ee"
+  "name": "Test Restaurant",
+  "location": "Test Location",
+  "contactInfo": "test@restaurant.com"
 }
 
-### Update a restaurant
-PUT http://localhost:8080/restaurants/1
+### Get the list of restaurants
+GET http://localhost:8080/restaurants
+Content-Type: application/json
+
+### Get restaurants filtered by name
+GET http://localhost:8080/restaurants?name=Test%20Restaurant
+Content-Type: application/json
+
+### Update the restaurant
+PUT http://localhost:8080/restaurants/4
 Content-Type: application/json
 
 {
-  "name": "Pahad poisid3",
-  "location": "Küüni 2, Tartu, Estonia",
-  "contactInfo": "pubi@pahadpoisid.ee"
+  "name": "Updated Test Restaurant",
+  "location": "Updated Test Location",
+  "contactInfo": "updated@testrestaurant.com"
 }
 
-### Delete a restaurant
-DELETE http://localhost:8080/restaurants/1
+### Get the restaurant
+GET http://localhost:8080/restaurants/5
+Content-Type: application/json
 
-### Get Menu by Restaurant ID
-GET http://localhost:8080/restaurants/:id/menu
+### Delete the restaurant
+### DELETE http://localhost:8080/restaurants/4
+### Content-Type: application/json
 
-### Create a Menu
-POST http://localhost:8080/restaurants/:id/menu
+### Generate a new restaurant (again)
+POST http://localhost:8080/restaurants
 Content-Type: application/json
 
 {
-  "lastUpdated": "2024-03-13T08:00:00"
+  "name": "Another Test Restaurant",
+  "location": "Another Test Location",
+  "contactInfo": "another@testrestaurant.com"
 }
 
-### Delete Menu by ID
-DELETE http://localhost:8080/restaurants/:id/menu/:menuId
+### Get the menu of the restaurant
+GET http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
 
-### Get All Menu Items by Restaurant ID and Menu ID
-GET http://localhost:8080/restaurants/:id/menu/:menuId/items
+### Create the menu of the restaurant
+POST http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
 
-### Get Menu Item by Restaurant ID, Menu ID, and Item ID
-GET http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
+### Get the menu of the restaurant (after creation)
+GET http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
 
-### Create a Menu Item
-POST http://localhost:8080/restaurants/:id/menu/:menuId/items
+### Get the menu
+GET http://localhost:8080/restaurants/4/menu/30
+Content-Type: application/json
+
+### Delete the menu
+### DELETE http://localhost:8080/restaurants/4/menu/5
+### Content-Type: application/json
+
+### Create the menu for the restaurant (again)
+POST http://localhost:8080/restaurants/4/menu
+Content-Type: application/json
+
+### Create a new menu item for the restaurant
+POST http://localhost:8080/restaurants/4/menu/30/items
 Content-Type: application/json
 
 {
-  "name": "Chicken Curry",
-  "description": "Delicious chicken curry with rice",
-  "price": 10.99,
+  "name": "New Menu Item",
+  "description": "A new menu item description",
+  "price": 10.5,
   "category": "Main Course",
   "availability": true,
-  "dietaryInfo": "Contains gluten"
+  "dietaryInfo": "Vegan"
 }
 
-### Update Menu Item
-PUT http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
+### Get the list of items in the restaurant’s menu
+GET http://localhost:8080/restaurants/4/menu/30/items
 Content-Type: application/json
-
-{
-  "name": "Vegetable Curry",
-  "description": "Delicious vegetable curry with rice",
-  "price": 8.99,
-  "category": "Vegetarian",
-  "availability": true,
-  "dietaryInfo": "Vegan-friendly"
-}
-
-### Delete Menu Item
-DELETE http://localhost:8080/restaurants/:id/menu/:menuId/items/:itemId
