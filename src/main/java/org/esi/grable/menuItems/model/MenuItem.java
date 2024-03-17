@@ -1,5 +1,6 @@
 package org.esi.grable.menuItems.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,5 +25,6 @@ public class MenuItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_id")
+    @JsonIgnore
     private Menu menu;
 }

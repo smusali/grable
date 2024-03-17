@@ -1,5 +1,6 @@
 package org.esi.grable.menus.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,7 @@ public class Menu {
 
     @ManyToOne
     @JoinColumn(name = "restaurantId", nullable = false)
+    @JsonIgnore
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
