@@ -11,8 +11,13 @@
 	<groupId>org.esi</groupId>
 	<artifactId>grable</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>grable</name>
 	<description>grable</description>
+	<modules>
+		<module>grable_backend/menu_service</module>
+		<module>grable_backend/restaurant_service</module>
+	</modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
