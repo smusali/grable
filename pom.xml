@@ -11,8 +11,13 @@
 	<groupId>org.esi</groupId>
 	<artifactId>grable</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 	<name>grable</name>
 	<description>grable</description>
+	<modules>
+		<module>grable_backend/menu_service</module>
+		<module>grable_backend/restaurant_service</module>
+	</modules>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -71,22 +76,5 @@
 			<version>1.5.10</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
