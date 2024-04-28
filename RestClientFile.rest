@@ -49,11 +49,11 @@ Content-Type: application/json
 }
 
 ### Get the menu of the restaurant
-GET http://localhost:8081/restaurants/1/menu
+GET http://localhost:8082/restaurants/1/menu
 Content-Type: application/json
 
 ### Create the menu of the restaurant
-POST http://localhost:8081/restaurants/1/menu
+POST http://localhost:8082/restaurants/1/menu
 Content-Type: application/json
 
 ### Get the menu of the restaurant (after creation)
@@ -93,3 +93,75 @@ Content-Type: application/json
 ### Delete a menu item for the restaurant
 DELETE http://localhost:8082/restaurants/4/menu/6/items/7
 Content-Type: application/json
+
+
+### ORDERS
+
+### Get All orders
+GET http://localhost:8083/orders
+Content-Type: application/json
+
+### Generate a new order
+POST http://localhost:8083/orders
+Content-Type: application/json
+
+{
+  "status": "NEW",
+  "restaurantId": 1,
+  "tableId": 1,
+  "dinerId": 1
+}
+
+### Update the order
+PUT http://localhost:8083/orders/1
+Content-Type: application/json
+
+{
+  "status": "IN_PROGRESS",
+  "restaurantId": 1,
+  "tableId": 1,
+  "dinerId": 1
+}
+
+### Get the order
+GET http://localhost:8083/orders/1
+Content-Type: application/json
+
+### Delete the order
+#DELETE http://localhost:8083/orders/2
+#Content-Type: application/json
+
+
+### ORDER DETAILS
+
+### Get All order details
+GET http://localhost:8083/orders/1/orderDetails
+Content-Type: application/json
+
+### Generate a new order detail
+POST http://localhost:8083/orders/1/orderDetails
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "menuItemId": 1,
+  "quantity": 3
+}
+
+### Update the order detail
+PUT http://localhost:8083/orders/1/orderDetails/1
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "menuItemId": 1,
+  "quantity": 4
+}
+
+### Get the order detail
+GET http://localhost:8083/orders/1/orderDetails/1
+Content-Type: application/json
+
+### Delete the order
+#DELETE http://localhost:8083/orders/1/orderDetails/2
+#Content-Type: application/json

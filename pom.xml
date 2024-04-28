@@ -15,8 +15,9 @@
 	<name>grable</name>
 	<description>grable</description>
 	<modules>
-		<module>src/backend/menu_service</module>
-		<module>src/backend/restaurant_service</module>
+		<module>/backend/menu_service</module>
+		<module>/backend/restaurant_service</module>
+		<module>/backend/order_service</module>
 	</modules>
 	<properties>
 		<java.version>17</java.version>
