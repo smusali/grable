@@ -36,7 +36,7 @@ public class OrderService {
     }
 
     public void updateOrder(Long id, Order order) {
-        Optional<Order> existingOrderOptional = orderRepository.findById(Long.valueOf(id));
+        Optional<Order> existingOrderOptional = orderRepository.findById(id);
         if (existingOrderOptional.isPresent()) {
             Order existingOrder = Order.builder()
                     .id(id)
