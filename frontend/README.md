@@ -1,4 +1,4 @@
-# grable_frontend
+# Grable Web
 
 ## Project setup
 ```
