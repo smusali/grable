@@ -1,5 +1,6 @@
 package org.esi.grable.restaurant_service.restaurants.controller;
 
+import org.esi.grable.restaurant_service.restaurants.model.RestaurantCriteria;
 import org.esi.grable.restaurant_service.restaurants.service.RestaurantService;
 import org.esi.grable.restaurant_service.restaurants.model.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,8 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping("")
-    public List<Restaurant> getAllRestaurants(@RequestParam(required = false) String location,
-                                              @RequestParam(required = false) String name) {
-        return restaurantService.getAllRestaurants(location, name);
+    public List<Restaurant> getAllRestaurants(@ModelAttribute RestaurantCriteria criteria) {
+        return restaurantService.getAllRestaurants(criteria);
     }
 
     @GetMapping("/{id}")

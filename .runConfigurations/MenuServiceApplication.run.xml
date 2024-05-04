@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="MenuServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="menu_service" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.esi.grable.menu_service.MenuServiceApplication" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

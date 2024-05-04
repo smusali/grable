@@ -21,27 +21,19 @@ public class MenuController {
     private MenuService menuService;
 
     @PostMapping
-    public ResponseEntity<Menu> createMenu(@PathVariable Long restaurantId) {
-        Menu menu = menuService.createMenu(restaurantId, LocalDateTime.now());
-        return new ResponseEntity<>(menu, HttpStatus.CREATED);
+    @ResponseStatus(HttpStatus.CREATED)
+    public Menu createMenu(@PathVariable Long restaurantId) {
+        return menuService.createMenu(restaurantId, LocalDateTime.now());
     }
 
     @GetMapping
-    public ResponseEntity<Menu> getMenuByRestaurantId(@PathVariable Long restaurantId) {
-        Menu menu = menuService.getMenuByRestaurantId(restaurantId);
-        if (menu == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(menu, HttpStatus.OK);
+    public Menu getMenuByRestaurantId(@PathVariable Long restaurantId) {
+        return menuService.getMenuByRestaurantId(restaurantId);
     }
 
     @GetMapping("/{menuId}")
-    public ResponseEntity<Menu> getMenuById(@PathVariable Long menuId) {
-        Menu menu = menuService.getMenuById(menuId);
-        if (menu == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(menu, HttpStatus.OK);
+    public Menu getMenuById(@PathVariable Long menuId) {
+        return menuService.getMenuById(menuId);
     }
 
     @DeleteMapping("/{menuId}")

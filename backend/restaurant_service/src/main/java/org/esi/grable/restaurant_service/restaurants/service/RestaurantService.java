@@ -1,8 +1,9 @@
 package org.esi.grable.restaurant_service.restaurants.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.esi.grable.restaurant_service.restaurants.repository.RestaurantRepository;
 import org.esi.grable.restaurant_service.restaurants.model.Restaurant;
+import org.esi.grable.restaurant_service.restaurants.model.RestaurantCriteria;
+import org.esi.grable.restaurant_service.restaurants.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +20,12 @@ public class RestaurantService {
     @Autowired
     private RestaurantRepository restaurantRepository;
 
-    public List<Restaurant> getAllRestaurants(String location, String name) {
+    public List<Restaurant> getAllRestaurants(RestaurantCriteria criteria) {
         List<Restaurant> restaurants = new ArrayList<>();
         restaurantRepository.findAll()
                 .forEach(restaurant -> {
-                    if ((isNull(location) || location.equals(restaurant.getLocation())) &&
-                            (isNull(name) || name.equals(restaurant.getName()))) {
+                    if ((isNull(criteria.getLocation()) || criteria.getLocation().equals(restaurant.getLocation())) &&
+                            (isNull(criteria.getName()) || criteria.getName().equals(restaurant.getName()))) {
                         restaurants.add(restaurant);
                     }
                 });
