@@ -1,9 +1,9 @@
 ### Get All restaurants
-GET http://localhost:8081/restaurants
+GET http://localhost:8080/restaurants
 Content-Type: application/json
 
 ### Generate a new restaurant
-POST http://localhost:8081/restaurants
+POST http://localhost:8080/restaurants
 Content-Type: application/json
 
 {
@@ -13,15 +13,15 @@ Content-Type: application/json
 }
 
 ### Get the list of restaurants
-GET http://localhost:8081/restaurants
+GET http://localhost:8080/restaurants
 Content-Type: application/json
 
 ### Get restaurants filtered by name
-GET http://localhost:8081/restaurants?name=Test%20Restaurant
+GET http://localhost:8080/restaurants?name=Test%20Restaurant
 Content-Type: application/json
 
 ### Update the restaurant
-PUT http://localhost:8081/restaurants/4
+PUT http://localhost:8080/restaurants/4
 Content-Type: application/json
 
 {
@@ -31,15 +31,15 @@ Content-Type: application/json
 }
 
 ### Get the restaurant
-GET http://localhost:8081/restaurants/5
+GET http://localhost:8080/restaurants/5
 Content-Type: application/json
 
 ### Delete the restaurant
-### DELETE http://localhost:8081/restaurants/4
+### DELETE http://localhost:8080/restaurants/4
 ### Content-Type: application/json
 
 ### Generate a new restaurant (again)
-POST http://localhost:8081/restaurants
+POST http://localhost:8080/restaurants
 Content-Type: application/json
 
 {
@@ -49,31 +49,31 @@ Content-Type: application/json
 }
 
 ### Get the menu of the restaurant
-GET http://localhost:8082/restaurants/1/menu
+GET http://localhost:8080/restaurants/1/menu
 Content-Type: application/json
 
 ### Create the menu of the restaurant
-POST http://localhost:8082/restaurants/1/menu
+POST http://localhost:8080/restaurants/1/menu
 Content-Type: application/json
 
 ### Get the menu of the restaurant (after creation)
-GET http://localhost:8082/restaurants/4/menu
+GET http://localhost:8080/restaurants/4/menu
 Content-Type: application/json
 
 ### Get the menu
-GET http://localhost:8082/restaurants/4/menu/30
+GET http://localhost:8080/restaurants/4/menu/30
 Content-Type: application/json
 
 ### Delete the menu
-### DELETE http://localhost:8082/restaurants/4/menu/5
+### DELETE http://localhost:8080/restaurants/4/menu/5
 ### Content-Type: application/json
 
 ### Create the menu for the restaurant (again)
-POST http://localhost:8082/restaurants/4/menu
+POST http://localhost:8080/restaurants/4/menu
 Content-Type: application/json
 
 ### Create a new menu item for the restaurant
-POST http://localhost:8082/restaurants/4/menu/30/items
+POST http://localhost:8080/restaurants/4/menu/30/items
 Content-Type: application/json
 
 {
@@ -86,23 +86,23 @@ Content-Type: application/json
 }
 
 ### Get the list of items in the restaurant’s menu
-GET http://localhost:8082/restaurants/4/menu/30/items
+GET http://localhost:8080/restaurants/4/menu/30/items
 Content-Type: application/json
 
 
 ### Delete a menu item for the restaurant
-DELETE http://localhost:8082/restaurants/4/menu/6/items/7
+DELETE http://localhost:8080/restaurants/4/menu/6/items/7
 Content-Type: application/json
 
 
 ### ORDERS
 
 ### Get All orders
-GET http://localhost:8083/orders
+GET http://localhost:8080/orders
 Content-Type: application/json
 
 ### Generate a new order
-POST http://localhost:8083/orders
+POST http://localhost:8080/orders
 Content-Type: application/json
 
 {
@@ -113,7 +113,7 @@ Content-Type: application/json
 }
 
 ### Update the order
-PUT http://localhost:8083/orders/1
+PUT http://localhost:8080/orders/1
 Content-Type: application/json
 
 {
@@ -124,22 +124,22 @@ Content-Type: application/json
 }
 
 ### Get the order
-GET http://localhost:8083/orders/1
+GET http://localhost:8080/orders/1
 Content-Type: application/json
 
 ### Delete the order
-#DELETE http://localhost:8083/orders/2
+#DELETE http://localhost:8080/orders/2
 #Content-Type: application/json
 
 
 ### ORDER DETAILS
 
 ### Get All order details
-GET http://localhost:8083/orders/1/orderDetails
+GET http://localhost:8080/orders/1/orderDetails
 Content-Type: application/json
 
 ### Generate a new order detail
-POST http://localhost:8083/orders/1/orderDetails
+POST http://localhost:8080/orders/1/orderDetails
 Content-Type: application/json
 
 {
@@ -149,7 +149,7 @@ Content-Type: application/json
 }
 
 ### Update the order detail
-PUT http://localhost:8083/orders/1/orderDetails/1
+PUT http://localhost:8080/orders/1/orderDetails/1
 Content-Type: application/json
 
 {
@@ -159,9 +159,9 @@ Content-Type: application/json
 }
 
 ### Get the order detail
-GET http://localhost:8083/orders/1/orderDetails/1
+GET http://localhost:8080/orders/1/orderDetails/1
 Content-Type: application/json
 
 ### Delete the order
-#DELETE http://localhost:8083/orders/1/orderDetails/2
+#DELETE http://localhost:8080/orders/1/orderDetails/2
 #Content-Type: application/json

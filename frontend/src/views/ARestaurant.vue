@@ -59,7 +59,7 @@ export default {
       this.errors[field] = "";
     },
     fetchRestaurant(id) {
-      fetch(`http://localhost:8081/restaurants/${id}`)
+      fetch(`http://localhost:8080/restaurants/${id}`)
         .then((response) => response.json())
         .then((data) => {
           this.restaurant = data;
@@ -86,7 +86,7 @@ export default {
       }
 
       if (Object.keys(this.errors).length === 0 && this.dirty) { // Check if any fields are dirty
-        fetch(`http://localhost:8081/restaurants/${this.restaurant.id}`, {
+        fetch(`http://localhost:8080/restaurants/${this.restaurant.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -103,7 +103,7 @@ export default {
       }
     },
     deleteRestaurant() {
-      fetch(`http://localhost:8081/restaurants/${this.restaurant.id}`, {
+      fetch(`http://localhost:8080/restaurants/${this.restaurant.id}`, {
         method: "DELETE",
       })
         .then((response) => {

@@ -1,19 +1,19 @@
 package org.esi.grable.menu_service.menuItems.service;
 
 import org.esi.grable.menu_service.menuItems.model.MenuItem;
+import org.esi.grable.menu_service.menuItems.model.MenuItemCriteria;
 import org.esi.grable.menu_service.menuItems.repository.MenuItemRepository;
 import org.esi.grable.menu_service.menus.model.Menu;
 import org.esi.grable.menu_service.menus.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Objects.isNull;
 
 @Service
 public class MenuItemService {
@@ -38,18 +38,12 @@ public class MenuItemService {
         return menuItemRepository.findByIdAndMenuId(itemId, menuId).orElse(null);
     }
 
-    public List<MenuItem> getItemsByCriteria(Long menuId, String name, String category, Boolean availability) {
-        Set<MenuItem> filteredItemsSet = new HashSet<>();
-        menuItemRepository.findByMenuId(menuId).forEach(item -> {
-            boolean matchesName = (name == null || item.getName().equalsIgnoreCase(name));
-            boolean matchesCategory = (category == null || item.getCategory().equalsIgnoreCase(category));
-            boolean matchesAvailability = (availability == null || item.isAvailability() == availability);
-
-            if (matchesName && matchesCategory && matchesAvailability) {
-                filteredItemsSet.add(item);
-            }
-        });
-        return new ArrayList<>(filteredItemsSet);
+    public List<MenuItem> getItemsByCriteria(Long menuId, MenuItemCriteria criteria) {
+        return menuItemRepository.findByMenuId(menuId).stream()
+                .filter(item -> (isNull(criteria.getName()) || item.getName().equalsIgnoreCase(criteria.getName())) &&
+                        (isNull(criteria.getCategory()) || item.getCategory().equalsIgnoreCase(criteria.getCategory())) &&
+                        (isNull(criteria.getAvailability()) || item.isAvailability() == criteria.getAvailability()))
+                .collect(Collectors.toList());
     }
 
     public MenuItem updateMenuItem(Long id, MenuItem menuItem, Long menuId) {
