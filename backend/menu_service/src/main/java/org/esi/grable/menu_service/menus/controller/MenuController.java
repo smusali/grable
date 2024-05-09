@@ -6,15 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import java.time.LocalDateTime;
-
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/menu")
 @Tag(name = "Menus", description = "CRUD Operations for Menus")
+@CrossOrigin(origins = "http://localhost:8080")
 public class MenuController {
 
     @Autowired
