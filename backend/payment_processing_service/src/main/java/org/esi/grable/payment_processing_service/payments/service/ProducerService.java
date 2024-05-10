@@ -1,7 +1,6 @@
 package org.esi.grable.payment_processing_service.payments.service;
 
 import org.esi.grable.payment_processing_service.payments.config.KafkaTopicConfiguration;
-import org.esi.grable.payment_processing_service.payments.model.Payment;
 import org.esi.grable.payment_processing_service.payments.model.PaymentDTO;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
