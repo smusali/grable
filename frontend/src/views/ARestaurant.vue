@@ -38,9 +38,9 @@
     <div class="menu-container">
       <div class="menu-card" v-if="menu">
         <h3>Menu</h3>
-        <p style="text-align: center; margin-bottom: 50px;">Last updated: <strong>{{ menu.lastUpdated.substr(0,10) }}</strong></p>
+        <p style="text-align: center; margin-bottom: 50px;">Last updated: <strong>{{ menu.lastUpdated.substr(0,10)}}</strong></p>
         <div v-if="menu.items.length === 0" style="text-align: center;">No items in the menu</div>
-        <ul class="menu-items">
+        <ul class="menu-items" v-if="menu && menu.items && menu.items.length > 0">
           <li v-for="item in menu.items" :key="item.id" class="menu-item">
             <div class="item-details">
               <h3 class="item-name" style="text-align: start; color: black;">{{ item.name }}</h3>
@@ -298,8 +298,11 @@ export default {
       this.deleteRestaurantModalVisible = false;
     },
     addItem() {
-      this.errors = {};
-      if (!this.newItem.name) {
+  // Clear previous errors
+  this.errors = {};
+
+  // Validate new item fields
+  if (!this.newItem.name) {
     this.errors.name = "Name is required.";
   } else if (this.newItem.name.length < 2 || this.newItem.name.length > 50) {
     this.errors.name = "Name should be between 2 and 50 characters.";
@@ -310,31 +313,29 @@ export default {
   } else if (this.newItem.description.length < 2 || this.newItem.description.length > 100) {
     this.errors.description = "Description should be between 2 and 100 characters.";
   }
+
   if (!this.newItem.price) {
     this.errors.price = "Price is required.";
   } else if (this.newItem.price <= 0) {
     this.errors.price = "Price should be greater than 0.";
   }
 
+  // If there are errors, stop execution
   if (Object.keys(this.errors).length > 0) {
     return;
   }
 
-
-
-
-
-
-
-  var newItem = {
+  // Create a new item object
+  const newItem = {
     name: this.newItem.name,
     description: this.newItem.description,
     price: this.newItem.price,
-    category: this.newItem.category,
+    category: this.newItem.category || "Main Course", // Default category
     availability: this.newItem.availability === 'yes', // Convert string to boolean
-    dietaryInfo: this.newItem.dietaryInfo,
+    dietaryInfo: this.newItem.dietaryInfo || "Vegan", // Default dietary info
   };
 
+  // Send a POST request to add the new item
   fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items`, {
     method: "POST",
     headers: {
@@ -344,13 +345,13 @@ export default {
   })
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        return response.json(); // Parse response JSON
       }
-      throw new Error("Failed to add item");
+      throw new Error("Failed to add item"); // Throw error if response is not okay
     })
     .then((data) => {
-      // Update menu data property
-      this.menu = data;
+      // Update the menu items with the new item
+      this.menu.items.push(data); 
       // Reset newItem fields
       this.newItem = {
         name: "",
@@ -364,13 +365,16 @@ export default {
       this.addItemModalVisible = false;
     })
     .catch((error) => {
+      // Handle any errors that occur during the fetch operation
       console.error("Error adding item:", error);
     });
 },
+
     clearError(field) {
       this.errors[field] = "";
     },
     fetchRestaurant(id) {
+      console.log("fetching restaurant");
       fetch(`http://localhost:8081/restaurants/${id}`)
         .then((response) => response.json())
         .then((data) => {
@@ -450,6 +454,7 @@ export default {
         });
     },
     fetchMenu() {
+      console.log("fetching menu");
       fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu`)
         .then((response) => response.json())
         .then((data) => {
@@ -494,6 +499,7 @@ export default {
   },
   mounted() {
   this.fetchRestaurant(this.$route.params.id);
+  
 
   // Check if a menu exists for the restaurant
   fetch(`http://localhost:8082/restaurants/${this.$route.params.id}/menu`)
