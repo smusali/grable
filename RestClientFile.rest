@@ -106,10 +106,9 @@ POST http://localhost:8080/orders
 Content-Type: application/json
 
 {
-  "status": "NEW",
+  "status": "WAITING_TO_BE_PAID",
   "restaurantId": 1,
-  "tableId": 1,
-  "dinerId": 1
+  "tableId": 1
 }
 
 ### Update the order
@@ -119,8 +118,7 @@ Content-Type: application/json
 {
   "status": "IN_PROGRESS",
   "restaurantId": 1,
-  "tableId": 1,
-  "dinerId": 1
+  "tableId": 1
 }
 
 ### Get the order
@@ -165,3 +163,19 @@ Content-Type: application/json
 ### Delete the order
 #DELETE http://localhost:8080/orders/1/orderDetails/2
 #Content-Type: application/json
+
+### Generate a new payment for order
+POST http://localhost:8084/payments
+Content-Type: application/json
+
+{
+  "transactionTrackingId": "31465659",
+  "orderId": 2,
+  "amount": 5.3,
+  "paymentMethod": "PAYPAL",
+  "paymentStatus": "DONE"
+}
+
+### Get payment result
+GET http://localhost:8084/payments/8
+Content-Type: application/json

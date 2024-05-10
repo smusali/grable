@@ -43,7 +43,6 @@ public class OrderService {
                     .status(order.getStatus())
                     .restaurantId(order.getRestaurantId())
                     .tableId(order.getTableId())
-                    .dinerId(order.getDinerId())
                     .timestamp(Instant.now())
                     .build();
             orderRepository.save(existingOrder);

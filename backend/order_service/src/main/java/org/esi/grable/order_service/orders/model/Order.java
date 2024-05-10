@@ -29,8 +29,5 @@ public class Order {
     @NotNull(message = "Table id cannot be null")
     private Long tableId;
 
-    @NotNull(message = "Diner id cannot be null")
-    private Long dinerId;
-
     private Instant timestamp;
 }
