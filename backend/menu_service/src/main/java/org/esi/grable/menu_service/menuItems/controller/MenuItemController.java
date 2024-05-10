@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/menu/{menuId}/items")
 @Tag(name = "Menu Items", description = "CRUD Operations for Menu Items")
+@CrossOrigin(origins = "http://localhost:8080")
 public class MenuItemController {
 
     @Autowired
