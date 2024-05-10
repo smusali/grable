@@ -1,7 +1,8 @@
 package org.esi.grable.order_service.orders.model;
 
 public enum OrderStatus {
-    NEW,
+    WAITING_TO_BE_PAID,
+    PAID,
     IN_PROGRESS,
-    DONE
+    DELIVERED
 }
