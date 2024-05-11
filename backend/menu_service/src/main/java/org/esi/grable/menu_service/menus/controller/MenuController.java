@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequestMapping("/restaurants/{restaurantId}/menu")
 @Tag(name = "Menus", description = "CRUD Operations for Menus")
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 public class MenuController {
 
     @Autowired
