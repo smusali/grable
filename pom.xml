@@ -15,6 +15,7 @@
 	<name>grable</name>
 	<description>grable</description>
 	<modules>
+		<module>/backend/payment_processing_service</module>
 		<module>/backend/menu_service</module>
 		<module>/backend/restaurant_service</module>
 		<module>/backend/order_service</module>

@@ -9,10 +9,10 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     <groupId>org.esi.grable</groupId>
-    <artifactId>order_service</artifactId>
+    <artifactId>payment_processing_service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>order_service</name>
-    <description>order_service</description>
+    <name>payment_processing_service</name>
+    <description>payment_processing_service</description>
     <properties>
         <java.version>17</java.version>
     </properties>
