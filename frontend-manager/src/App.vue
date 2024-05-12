@@ -1,32 +1,46 @@
 <template>
-  <nav>
-    <router-link to="/allrestaurants">Restaurants</router-link> |
-    <router-link to="/addrestaurant">Add a Restaurant</router-link>
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <router-link to="/allrestaurants" class="navbar-item" active-class="active-link">Restaurants</router-link>
+      <router-link to="/addrestaurant" class="navbar-item" active-class="active-link">Add a Restaurant</router-link>
+    </div>
   </nav>
   <router-view/>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Global styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+/* Navbar styles */
+.navbar {
+  background-color: #2980b9; /* Change color as per preference */
+  color: #fff;
+  padding: 10px 0;
 }
 
-nav a {
+.navbar-menu {
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-item {
+  text-decoration: none;
+  color: #fff;
   font-weight: bold;
-  color: #2c3e50;
+  margin: 0 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-nav a.router-link-exact-active {
-  color: #42b983;
+.navbar-item:hover,
+.active-link {
+  background-color: #1e639b; /* Darker shade on hover and when active */
 }
 </style>
-<script setup>
-</script>

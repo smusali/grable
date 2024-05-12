@@ -1,5 +1,27 @@
 <template>
   <div class="ARestaurant">
+
+    
+    <button @click="toggleOrdersVisibility" class="toggle-orders-button">
+      {{ ordersVisible ? 'Hide Orders' : 'Show Orders' }}
+    </button>
+
+    <!-- Orders container with v-if to toggle visibility -->
+    <div class="orders-container" v-if="ordersVisible">
+      <!-- Check if there are orders, if not, display a message -->
+      <div v-if="orders.length === 0" style="text-align: center;">Currently, there are no orders.</div>
+      <!-- Iterate through orders if there are any -->
+      <div v-else>
+        <div v-for="order in orders" :key="order.id" class="order-card">
+          <div class="order-details">
+            <p class="order-name">{{ order.name }}</p>
+            <p class="order-quantity">Quantity: {{ order.quantity }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div id="form">
       <h3>A Restaurant</h3>
       <div class="input-group">
@@ -188,6 +210,7 @@ export default {
   data() {
     
   return {
+    ordersVisible: false,
     editItemModalVisible: false,
     addItemModalVisible: false, 
     deleteItemModalVisible: false,
@@ -220,9 +243,59 @@ export default {
     deleteModalVisible: false,
     dirty: false, 
     menu: null,// Track whether any fields have been changed
+    orders: [],
   };
 },
   methods: {
+
+    toggleOrdersVisibility() {
+      this.ordersVisible = !this.ordersVisible;
+    },
+
+    fetchOrders() {
+  fetch(`http://localhost:8083/orders/1/orderDetails`)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error("Failed to fetch orders");
+    })
+    .then((ordersData) => {
+      this.matchOrdersWithMenu(ordersData);
+    })
+    .catch((error) => {
+      console.error("Error fetching orders:", error);
+    });
+},
+
+matchOrdersWithMenu(ordersData) {
+  const menuItems = this.menu.items;
+  console.log(ordersData);
+
+  // Loop through each order
+  for (const order of ordersData) {
+    const menuItem = menuItems.find((item) => item.id === order.menuItemId);
+
+    console.log(menuItem);
+
+    if (menuItem) {
+      this.orders.push({
+        id: order.id,
+        menuItemId: order.menuItemId,
+        quantity: order.quantity,
+        name: menuItem.name,
+        price: menuItem.price,
+      });
+
+      console.log(this.orders);
+    }
+  }
+
+},
+
+    hideDeleteModal() {
+      this.deleteModalVisible = false;
+},
     showEditModal(item) {
     this.editedItem = { ...item }; // Copy item data to editedItem
     this.editItemModalVisible = true;
@@ -374,7 +447,6 @@ export default {
       this.errors[field] = "";
     },
     fetchRestaurant(id) {
-      console.log("fetching restaurant");
       fetch(`http://localhost:8081/restaurants/${id}`)
         .then((response) => response.json())
         .then((data) => {
@@ -410,7 +482,6 @@ export default {
           body: JSON.stringify(this.restaurant),
         })
           .then((response) => {
-            console.log(response.data);
             this.$router.push("/allrestaurants");
           })
           .catch((e) => {
@@ -423,7 +494,6 @@ export default {
     method: "DELETE",
   })
     .then((response) => {
-      console.log(response.data);
       this.$router.push("/allrestaurants");
     })
     .catch((e) => {
@@ -454,7 +524,6 @@ export default {
         });
     },
     fetchMenu() {
-      console.log("fetching menu");
       fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu`)
         .then((response) => response.json())
         .then((data) => {
@@ -500,7 +569,6 @@ export default {
   mounted() {
   this.fetchRestaurant(this.$route.params.id);
   
-
   // Check if a menu exists for the restaurant
   fetch(`http://localhost:8082/restaurants/${this.$route.params.id}/menu`)
     .then((response) => {
@@ -512,6 +580,9 @@ export default {
     .then((data) => {
       // If a menu exists, store it in the menu data property
       this.menu = data;
+      
+      // After setting the menu data, fetch the orders
+      this.fetchOrders();
     })
     .catch((error) => {
       // If a menu does not exist, handle the error (e.g., display a message)
@@ -531,6 +602,54 @@ export default {
 </script>
 
 <style scoped>
+
+.toggle-orders-button {
+  background-color: #5C6BC0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-orders-button:hover {
+  background-color: #3949AB;
+}
+
+.orders-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.order-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  width: 180px; /* Adjust width as needed */
+  transition: all 0.3s ease;
+  margin: 20px;
+  display: inline-block;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.order-name {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.order-quantity {
+  color: #666666;
+}
 
 .input-group {
   margin-bottom: 20px;
@@ -567,7 +686,7 @@ export default {
 }
 
 .ARestaurant {
-  max-width: 420px;
+  max-width: 620px;
   margin: 30px auto;
   background: #f4f4f4;
   text-align: left;
