@@ -98,21 +98,21 @@ Content-Type: application/json
 ### ORDERS
 
 ### Get All orders
-GET http://localhost:8080/orders
+GET http://localhost:8083/orders
 Content-Type: application/json
 
 ### Generate a new order
-POST http://localhost:8080/orders
+POST http://localhost:8083/orders
 Content-Type: application/json
 
 {
   "status": "WAITING_TO_BE_PAID",
-  "restaurantId": 1,
+  "restaurantId": 15,
   "tableId": 1
 }
 
 ### Update the order
-PUT http://localhost:8080/orders/1
+PUT http://localhost:8083/orders/1
 Content-Type: application/json
 
 {
@@ -122,7 +122,7 @@ Content-Type: application/json
 }
 
 ### Get the order
-GET http://localhost:8080/orders/1
+GET http://localhost:8083/orders/1
 Content-Type: application/json
 
 ### Delete the order
@@ -133,21 +133,21 @@ Content-Type: application/json
 ### ORDER DETAILS
 
 ### Get All order details
-GET http://localhost:8080/orders/1/orderDetails
+GET http://localhost:8083/orders/1/orderDetails
 Content-Type: application/json
 
 ### Generate a new order detail
-POST http://localhost:8080/orders/1/orderDetails
+POST http://localhost:8083/orders/1/orderDetails
 Content-Type: application/json
 
 {
-  "orderId": 1,
-  "menuItemId": 1,
-  "quantity": 3
+  "orderId": 2,
+  "menuItemId": 20,
+  "quantity": 4
 }
 
 ### Update the order detail
-PUT http://localhost:8080/orders/1/orderDetails/1
+PUT http://localhost:8083/orders/1/orderDetails/1
 Content-Type: application/json
 
 {
@@ -157,7 +157,7 @@ Content-Type: application/json
 }
 
 ### Get the order detail
-GET http://localhost:8080/orders/1/orderDetails/1
+GET http://localhost:8083/orders/1/orderDetails/1
 Content-Type: application/json
 
 ### Delete the order

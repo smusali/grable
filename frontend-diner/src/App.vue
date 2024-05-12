@@ -1,8 +1,4 @@
 <template>
-  <nav>
-    <router-link to="/allrestaurants">Restaurants</router-link> |
-    <router-link to="/addrestaurant">Add a Restaurant</router-link>
-  </nav>
   <router-view/>
 </template>
 
