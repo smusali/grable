@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AllRestaurants from "../views/AllRestaurants.vue";
 import ARestaurants from "../views/ARestaurant.vue";
 import AddRestaurants from "../views/AddRestaurant.vue";
+import QrcodeVue from "../views/QrCode.vue";
+import ChooseMenu from "../views/ChooseMenu.vue";
 
 
 
@@ -30,6 +32,18 @@ const routes = [{
     path: "/:catchAll(.*)",
     name: "AllRestaurants",
     component: AllRestaurants,
+
+  },
+
+  {
+    path: "/getQrCode",
+    name: "QrcodeVue",
+    component: QrcodeVue,
+  },
+  {
+    path: "/chooseMenu",
+    name: "ChooseMenu",
+    component: ChooseMenu,
   }
 ]
 

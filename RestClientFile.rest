@@ -169,7 +169,7 @@ POST http://localhost:8084/payments
 Content-Type: application/json
 
 {
-  "transactionTrackingId": "31465659",
+  "transactionTrackingId": "314985659",
   "orderId": 2,
   "amount": 5.3,
   "paymentMethod": "PAYPAL",
