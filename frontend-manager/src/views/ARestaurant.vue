@@ -1,6 +1,11 @@
 <template>
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <router-link to="/allrestaurants" class="navbar-item" active-class="active-link">Restaurants</router-link>
+      <router-link to="/addrestaurant" class="navbar-item" active-class="active-link">Add a Restaurant</router-link>
+    </div>
+  </nav>
   <div class="ARestaurant">
-
     
     <button @click="toggleOrdersVisibility" class="toggle-orders-button">
       {{ ordersVisible ? 'Hide Orders' : 'Show Orders' }}
@@ -16,6 +21,9 @@
           <div class="order-details">
             <p class="order-name">{{ order.name }}</p>
             <p class="order-quantity">Quantity: {{ order.quantity }}</p>
+            <button @click="markOrderCompleted(order.id)" class="toggle-orders-button">
+              Mark completed
+            </button>
           </div>
         </div>
       </div>
@@ -252,6 +260,19 @@ export default {
       this.ordersVisible = !this.ordersVisible;
     },
 
+    markOrderCompleted(id) {
+      fetch(`http://localhost:8083/orders/1/orderDetails/`+id, { method: 'DELETE' })
+          .then((response) => {
+            if (response.ok) {
+              console.log("Order deleted");
+              location.reload();
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching orders:", error);
+          });
+    },
+
     fetchOrders() {
   fetch(`http://localhost:8083/orders/1/orderDetails`)
     .then((response) => {
@@ -326,7 +347,7 @@ matchOrdersWithMenu(ordersData) {
       return;
     }
 
-    fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items/${this.editedItem.id}`, {
+    fetch(`http://localhost:8080/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items/${this.editedItem.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -409,7 +430,7 @@ matchOrdersWithMenu(ordersData) {
   };
 
   // Send a POST request to add the new item
-  fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items`, {
+  fetch(`http://localhost:8080/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -447,7 +468,7 @@ matchOrdersWithMenu(ordersData) {
       this.errors[field] = "";
     },
     fetchRestaurant(id) {
-      fetch(`http://localhost:8081/restaurants/${id}`)
+      fetch(`http://localhost:8080/restaurants/${id}`)
         .then((response) => response.json())
         .then((data) => {
           this.restaurant = data;
@@ -474,7 +495,7 @@ matchOrdersWithMenu(ordersData) {
       }
 
       if (Object.keys(this.errors).length === 0 && this.dirty) { // Check if any fields are dirty
-        fetch(`http://localhost:8081/restaurants/${this.restaurant.id}`, {
+        fetch(`http://localhost:8080/restaurants/${this.restaurant.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -490,7 +511,7 @@ matchOrdersWithMenu(ordersData) {
       }
     },
     deleteRestaurant() {
-  fetch(`http://localhost:8081/restaurants/${this.restaurant.id}`, {
+  fetch(`http://localhost:8080/restaurants/${this.restaurant.id}`, {
     method: "DELETE",
   })
     .then((response) => {
@@ -503,7 +524,7 @@ matchOrdersWithMenu(ordersData) {
   this.deleteModalVisible = false;
 },
     createMenu() {
-      fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu`, {
+      fetch(`http://localhost:8080/restaurants/${this.restaurant.id}/menu`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -524,7 +545,7 @@ matchOrdersWithMenu(ordersData) {
         });
     },
     fetchMenu() {
-      fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu`)
+      fetch(`http://localhost:8080/restaurants/${this.restaurant.id}/menu`)
         .then((response) => response.json())
         .then((data) => {
           this.menu = data;
@@ -540,7 +561,7 @@ matchOrdersWithMenu(ordersData) {
     },
     deleteItem(itemId) {
     // Assuming you have an API endpoint to delete an item by its ID
-    fetch(`http://localhost:8082/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items/${itemId}`, {
+    fetch(`http://localhost:8080/restaurants/${this.restaurant.id}/menu/${this.menu.id}/items/${itemId}`, {
       method: "DELETE",
     })
     .then((response) => {
@@ -570,7 +591,7 @@ matchOrdersWithMenu(ordersData) {
   this.fetchRestaurant(this.$route.params.id);
   
   // Check if a menu exists for the restaurant
-  fetch(`http://localhost:8082/restaurants/${this.$route.params.id}/menu`)
+  fetch(`http://localhost:8080/restaurants/${this.$route.params.id}/menu`)
     .then((response) => {
       if (response.ok) {
         return response.json();

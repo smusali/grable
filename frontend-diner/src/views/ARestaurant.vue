@@ -19,10 +19,6 @@
         <div v-if="menu.items.length === 0" class="no-items">No items in the menu</div>
         <div class="menu-items" v-else>
           <div v-for="item in menu.items" :key="item.id" class="menu-item">
-            <div class="item-image">
-              <!-- Placeholder for item image -->
-              <img src="https://via.placeholder.com/100" alt="Item Image">
-            </div>
             <div class="item-details">
               <h4>{{ item.name }}</h4>
               <p class="description">{{ item.description }}</p>
@@ -104,7 +100,7 @@ export default {
   },
   methods: {
     fetchRestaurant(id) {
-      fetch(`http://localhost:8081/restaurants/${id}`)
+      fetch(`http://localhost:8080/restaurants/${id}`)
         .then((response) => response.json())
         .then((data) => {
           this.restaurant = data;
@@ -112,7 +108,7 @@ export default {
         .catch((err) => console.log(err.message));
     },
     fetchMenu(id) {
-      fetch(`http://localhost:8082/restaurants/${id}/menu`)
+      fetch(`http://localhost:8080/restaurants/${id}/menu`)
         .then((response) => response.json())
         .then((data) => {
           this.menu = data;

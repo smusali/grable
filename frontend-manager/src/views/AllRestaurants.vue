@@ -1,4 +1,10 @@
 <template>
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <router-link to="/allrestaurants" class="navbar-item" active-class="active-link">Restaurants</router-link>
+      <router-link to="/addrestaurant" class="navbar-item" active-class="active-link">Add a Restaurant</router-link>
+    </div>
+  </nav>
   <div class="AllRestaurants">
     <h1>All Restaurants</h1>
     <div class="restaurants-list">
@@ -25,17 +31,20 @@ export default {
   },
   methods: {
     fetchRestaurants() {
+      const token = localStorage.getItem('jwtToken');
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      };
       // fetch is a GET request by default unless stated otherwise. Therefore, it will fetch all restaurants from the database
-      fetch(`http://localhost:8081/restaurants`)
+      fetch(`http://localhost:8080/restaurants`, { headers })
         .then((response) => response.json())
         .then((data) => (this.restaurants = data))
         .catch((err) => console.log(err.message));
     },
   },
   mounted() {
-    // call fetchRestaurants() when this element (AllRestaurants()) mounts
     this.fetchRestaurants();
-    console.log("mounted");
   },
 };
 </script>

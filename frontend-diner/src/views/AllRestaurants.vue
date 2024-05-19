@@ -26,7 +26,7 @@ export default {
   methods: {
     fetchRestaurants() {
       // fetch is a GET request by default unless stated otherwise. Therefore, it will fetch all restaurants from the database
-      fetch(`http://localhost:8081/restaurants`)
+      fetch(`http://localhost:8080/restaurants`)
         .then((response) => response.json())
         .then((data) => (this.restaurants = data))
         .catch((err) => console.log(err.message));

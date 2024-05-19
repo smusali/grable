@@ -1,10 +1,4 @@
 <template>
-  <nav class="navbar">
-    <div class="navbar-menu">
-      <router-link to="/allrestaurants" class="navbar-item" active-class="active-link">Restaurants</router-link>
-      <router-link to="/addrestaurant" class="navbar-item" active-class="active-link">Add a Restaurant</router-link>
-    </div>
-  </nav>
   <router-view/>
 </template>
 

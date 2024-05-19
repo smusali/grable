@@ -1,4 +1,10 @@
 <template>
+  <nav class="navbar">
+    <div class="navbar-menu">
+      <router-link to="/allrestaurants" class="navbar-item" active-class="active-link">Restaurants</router-link>
+      <router-link to="/addrestaurant" class="navbar-item" active-class="active-link">Add a Restaurant</router-link>
+    </div>
+  </nav>
   <div class="form">
     <h3>Add a Restaurant</h3>
 
@@ -71,7 +77,7 @@ export default {
           contactInfo: this.restaurants.contactInfo,
         };
 
-        fetch("http://localhost:8081/restaurants", {
+        fetch("http://localhost:8080/restaurants", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
